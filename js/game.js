@@ -53,3 +53,12 @@ function unflipCards() {
 function resetBoard() {
     [hasFlippedCard, blockboard, firstCard, secondCard] = [false, false, null, null];
 }
+
+function shuffle() {
+    cards.forEach(card => {
+        let randomPos = Math.floor(Math.random() * 12);
+        card.style.order = randomPos;
+    });
+}
+
+shuffle();
