@@ -2,20 +2,25 @@ const cards = document.querySelectorAll('.card');
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
+let blockboard = false;
 
 
 function flipCard() {
+    if (blockboard) return;
+    if (this === firstCard) return;
+    if (this === secondCard) return;
+
     this.classList.add('flipped');
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
-        return
+
+        return;
     }
 
     secondCard = this;
     hasFlippedCard = false;
-
     checkForMatch();
 }
 
@@ -35,6 +40,8 @@ function disableCards() {
 }
 
 function unflipCards() {
+    blockboard = true;
+
     setTimeout(() => {
         firstCard.classList.remove('flipped');
         secondCard.classList.remove('flipped');
@@ -44,5 +51,5 @@ function unflipCards() {
 }
 
 function resetBoard() {
-    [hasFlippedCard, firstCard, secondCard] = [false, null, null];
+    [hasFlippedCard, blockboard, firstCard, secondCard] = [false, false, null, null];
 }
